@@ -1,5 +1,6 @@
 package com.devsuperior.bds02.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,43 +11,33 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.devsuperior.bds02.dto.CityDTO;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "tb_city")
-public class City {
+@NoArgsConstructor
+public class City implements Serializable {	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter
+	@Setter
 	private Long id;
+	@Getter
+	@Setter
 	private String name;
 	
 	@OneToMany(mappedBy = "city")
+	@Getter
 	private List<Event> events = new ArrayList<>();
-	
-	public City() {
-	}
 
 	public City(Long id, String name) {
 		this.id = id;
 		this.name = name;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<Event> getEvents() {
-		return events;
 	}
 }
